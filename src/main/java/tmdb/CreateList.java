@@ -25,7 +25,7 @@ public class CreateList {
                 .all().extract().response();
     }
     @Test(priority = 1)
-    public void AddMovie(){
+    public void addMovie(){
         String payload = "{\n" +
                 "  \"media_id\": 14911\n" +
                 "}";
@@ -64,5 +64,21 @@ public class CreateList {
                 .extract()
                 .response();
 
+    }
+    @Test (priority = 3)
+    public void clearList(){
+       given()
+               .baseUri("https://api.themoviedb.org")
+               .when()
+               .queryParam("api_key","8dde48da411a7993668563ab06b893a1")
+               .queryParam("session_id","9078f551bfb19d83403ca9880bf6a5a16444a5f3")
+               .queryParam("confirm", "true")
+               .post("3/list/8195512/clear")
+               .then()
+               .statusCode(201)
+               .log()
+               .all()
+               .extract()
+               .response();
     }
 }
